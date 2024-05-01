@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Resetting default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Setting default font-family for the body */
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Styling the heading */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Styling the form container */
+div {
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+/* Styling the form elements */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Styling the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead th {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+}
+
+tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+/* Alternating row colors */
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Styling for the link generated */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+
+<body>
+    <h1>URL Shortner</h1>
+
+    <% if (locals.id) { %>
+    <p>URL Generated: http://localhost:3000/redirect/<%= id %></p>
+
+    <% } %>
+    <div>
+        <form action="/url" method="post">
+            <label for="">Enter Your Original URL</label>
+            <input type="text" name="url" placeholder="https://example.com">
+            <button>Generate</button>
+        </form>
+    </div>
+
+    <% if (locals.urls) { %>
+        <table>
+            <thead>
+                <th>S. No</th>
+                <th>ShortId</th>
+                <th>Redirect</th>
+                <th>Clicks</th>
+            </thead>
+            <tbody>
+                <% urls.forEach((url,index) => { %>
+                    <tr>
+
+                        <td><%= index+1 %></td>
+                        <td><%= url.shortId %></td>
+                        <td><%= url.redirectUrl %></td>
+                        <td><%= url.visitHistory.length %></td>
+                        
+                    </tr>
+                        <% }) %>
+            </tbody>
+        </table>
+     
+    <% } %>
+
+    <div>
+
+    </div>
+
+
+</body>
+
+</html>
